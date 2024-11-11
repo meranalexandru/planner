@@ -1,0 +1,37 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="planner.MainPage"
+             Title="Today's Tasks">
+
+    <StackLayout Padding="20">
+        <Label Text="Today's Tasks" FontSize="Large" HorizontalOptions="Center" />
+
+        <!-- CollectionView to display tasks -->
+        <CollectionView x:Name="TasksCollectionView" SelectionMode="Single" SelectionChanged="OnTaskSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItem Text="Delete" BackgroundColor="Red" CommandParameter="{Binding}" Invoked="OnDeleteTaskInvoked" />
+                        </SwipeView.RightItems>
+                        <Frame Padding="10" Margin="5">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                    <Label Text="{Binding DueDate}" FontSize="Small" />
+                                </StackLayout>
+
+                                <!-- Delete Button, visible only on Windows -->
+                                <Button Text="🗑" Clicked="OnDeleteTaskButtonClicked" CommandParameter="{Binding}"
+                                        HorizontalOptions="End" VerticalOptions="Center" IsVisible="{OnPlatform Default='False', WinUI='True'}" />
+                            </StackLayout>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Add New Task" Clicked="OnAddTaskClicked"
+                HorizontalOptions="End" VerticalOptions="EndAndExpand" />
+    </StackLayout>
+</ContentPage>

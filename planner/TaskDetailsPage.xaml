@@ -1,0 +1,30 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="planner.TaskDetailsPage"
+             Title="Task Details">
+
+    <StackLayout Padding="20" Spacing="10">
+        <Entry x:Name="TaskNameEntry" Placeholder="Task Name" />
+
+        <DatePicker x:Name="DueDatePicker" />
+
+        <Editor x:Name="DescriptionEditor" Placeholder="Task Description" AutoSize="TextChanges" HeightRequest="100" />
+
+        <Picker x:Name="PriorityPicker" Title="Priority">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:Int32}">
+                    <x:Int32>1</x:Int32>
+                    <x:Int32>2</x:Int32>
+                    <x:Int32>3</x:Int32>
+                    <x:Int32>4</x:Int32>
+                    <x:Int32>5</x:Int32>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Switch x:Name="IsContinuousSwitch" />
+        <Label Text="Is Continuous" />
+
+        <Button Text="Save Task" Clicked="OnSaveTaskClicked" />
+    </StackLayout>
+</ContentPage>
