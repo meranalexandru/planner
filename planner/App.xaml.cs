@@ -11,10 +11,12 @@ namespace planner
         {
             InitializeComponent();
 
+            // Set up the SQLite database path and initialize DatabaseHelper
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Planner.db3");
             Database = new DatabaseHelper(dbPath);
 
-            MainPage = new NavigationPage(new MainPage());
+            // Set the FlyoutMenuPage as the main page
+            MainPage = new FlyoutMenuPage();
         }
     }
 }

@@ -1,0 +1,27 @@
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:planner"
+            x:Class="planner.FlyoutMenuPage">
+
+    <!-- Define the Flyout Menu -->
+    <FlyoutPage.Flyout>
+        <ContentPage Title="Menu" BackgroundColor="LightGray">
+            <StackLayout Padding="20">
+                <!-- Today Button with the Current Day Number -->
+                <Button Text="{Binding TodayIconText}" Clicked="OnTodayClicked" />
+
+                <!-- Projects Button with "P" Icon -->
+                <Button Text="P" Clicked="OnProjectsClicked" />
+            </StackLayout>
+        </ContentPage>
+    </FlyoutPage.Flyout>
+
+    <!-- Define the Main Page Area -->
+    <FlyoutPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <local:MainPage />
+            </x:Arguments>
+        </NavigationPage>
+    </FlyoutPage.Detail>
+</FlyoutPage>
