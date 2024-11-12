@@ -25,6 +25,9 @@
         <Switch x:Name="IsContinuousSwitch" />
         <Label Text="Is Continuous" />
 
+        <!-- Project selection picker -->
+        <Picker x:Name="ProjectPicker" Title="Select Project" />
+
         <Button Text="Save Task" Clicked="OnSaveTaskClicked" />
     </StackLayout>
 </ContentPage>
