@@ -3,7 +3,25 @@
              x:Class="planner.ProjectsPage"
              Title="Projects">
 
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Projects Page" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
+    <StackLayout Padding="10">
+        <!-- Header -->
+        <Label Text="Projects" FontSize="Large" HorizontalOptions="Center" />
+
+        <!-- CollectionView for displaying projects -->
+        <CollectionView x:Name="ProjectsCollectionView" SelectionMode="Single" SelectionChanged="OnProjectSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightGray" CornerRadius="5" Padding="10" Margin="5">
+                        <StackLayout>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" />
+                            <Label Text="{Binding Description}" FontSize="Small" TextColor="Gray" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Button to add a new project -->
+        <Button Text="Add Project" Clicked="OnAddProjectClicked" HorizontalOptions="Center" Margin="10"/>
     </StackLayout>
 </ContentPage>

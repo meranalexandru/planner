@@ -8,10 +8,10 @@
         <ContentPage Title="Menu" BackgroundColor="LightGray">
             <StackLayout Padding="20">
                 <!-- Today Button with the Current Day Number -->
-                <Button Text="{Binding TodayIconText}" Clicked="OnTodayClicked" />
+                <Button Text="Tasks" Clicked="OnTodayClicked" />
 
                 <!-- Projects Button with "P" Icon -->
-                <Button Text="P" Clicked="OnProjectsClicked" />
+                <Button Text="Projects" Clicked="OnProjectsClicked" />
             </StackLayout>
         </ContentPage>
     </FlyoutPage.Flyout>

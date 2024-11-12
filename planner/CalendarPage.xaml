@@ -1,0 +1,28 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="planner.CalendarPage"
+             Title="Calendar">
+
+    <StackLayout Padding="10">
+        <toolkit:CalendarView x:Name="Calendar"
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand"
+                              SelectedDate="{Binding SelectedDate}"
+                              SelectionMode="Single"
+                              DateSelected="OnDateSelected" />
+
+        <Label Text="Upcoming Events" FontSize="Large" HorizontalOptions="Center" Margin="0,20,0,10" />
+
+        <!-- ListView for displaying events on the selected date -->
+        <ListView x:Name="EventsListView"
+                  ItemsSource="{Binding UpcomingEvents}"
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding DueDate}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
