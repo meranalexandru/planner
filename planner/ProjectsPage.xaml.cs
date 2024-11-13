@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
-using System.Collections.Generic;
 using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace planner
 {
@@ -18,26 +19,39 @@ namespace planner
             ProjectsCollectionView.ItemsSource = projects;
         }
 
+        private async void OnViewProjectClicked(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.CommandParameter is Project projectToView)
+            {
+                // Navigate to the ProjectViewPage with the selected project
+                await Navigation.PushAsync(new ProjectViewPage(projectToView));
+            }
+        }
+
         private async void OnAddProjectClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ProjectDetailsPage());
         }
 
-        private async void OnProjectSelected(object sender, SelectionChangedEventArgs e)
+        private async void OnEditProjectClicked(object sender, EventArgs e)
         {
-            if (e.CurrentSelection.Count == 0)
-                return;
-
-            // Get the selected project
-            var selectedProject = e.CurrentSelection[0] as Project;
-            if (selectedProject != null)
+            if (sender is Button button && button.CommandParameter is Project projectToEdit)
             {
-                // Navigate to ProjectDetailsPage with the selected project for editing
-                await Navigation.PushAsync(new ProjectDetailsPage(selectedProject));
+                await Navigation.PushAsync(new ProjectDetailsPage(projectToEdit));
             }
+        }
 
-            // Clear selection (optional, to avoid it remaining selected)
-            ProjectsCollectionView.SelectedItem = null;
+        private async void OnDeleteProjectClicked(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.CommandParameter is Project projectToDelete)
+            {
+                bool confirmDelete = await DisplayAlert("Confirm Delete", "Are you sure you want to delete this project?", "Yes", "No");
+                if (confirmDelete)
+                {
+                    await App.Database.DeleteProjectAsync(projectToDelete);
+                    LoadProjects(); // Refresh the project list
+                }
+            }
         }
 
         protected override void OnAppearing()

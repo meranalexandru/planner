@@ -1,5 +1,6 @@
 using Microsoft.Maui.Controls;
 using System;
+using System.Threading.Tasks;
 
 namespace planner
 {
@@ -26,6 +27,16 @@ namespace planner
             await NavigateToPageAsync(new ProjectsPage());
         }
 
+        private async void OnTodoistTasksClicked(object sender, EventArgs e)
+        {
+            await NavigateToPageAsync(new TodoistIntegrationPage());
+        }
+
+        private async void OnStatisticsClicked(object sender, EventArgs e)
+        {
+            await NavigateToPageAsync(new StatisticsPage());
+        }
+
         private async Task NavigateToPageAsync(Page page)
         {
             // Set up navigation with a NavigationPage
@@ -36,8 +47,6 @@ namespace planner
             // Wait for a brief delay to allow page rendering to start
             await Task.Delay(100);
 
-            // Now, safely close the sidebar
-        //    IsPresented = false;
         }
 
         private void OnNavigationPopped(object sender, NavigationEventArgs e)

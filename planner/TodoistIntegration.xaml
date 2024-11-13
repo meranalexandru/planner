@@ -1,0 +1,33 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="planner.TodoistIntegrationPage"
+             Title="Todoist Integration">
+
+    <StackLayout Padding="10">
+        <Label Text="Todoist Active Tasks" FontSize="Large" HorizontalOptions="Center" />
+
+        <!-- ListView to display tasks -->
+        <ListView x:Name="TasksListView" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" Orientation="Vertical">
+                            <Label Text="{Binding content}" FontAttributes="Bold" FontSize="Medium" />
+                            <Label Text="{Binding due.date}" FontSize="Small" TextColor="Gray" />
+                            <Label Text="{Binding description}" FontSize="Small" TextColor="Gray" />
+                            <Label Text="{Binding url}" FontSize="Small" TextColor="Blue" />
+
+                            <!-- Complete Button -->
+                            <Button Text="Complete Task"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="OnCompleteTaskClicked"
+                                    BackgroundColor="Green"
+                                    TextColor="White"
+                                    Margin="0,5,0,0" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

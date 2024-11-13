@@ -1,11 +1,30 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="planner.ProjectDetailsPage"
-             Title="New Project">
+             Title="Project Details">
 
-    <StackLayout Padding="20" Spacing="10">
+    <StackLayout Padding="10" Spacing="10">
+        <!-- Project Name -->
         <Entry x:Name="ProjectNameEntry" Placeholder="Project Name" />
-        <Editor x:Name="ProjectDescriptionEditor" Placeholder="Project Description" AutoSize="TextChanges" HeightRequest="100" />
+
+        <!-- Project Description -->
+        <Editor x:Name="ProjectDescriptionEditor" Placeholder="Project Description" AutoSize="TextChanges" />
+
+        <!-- Start Date Picker -->
+        <Label Text="Start Date" />
+        <DatePicker x:Name="StartDatePicker" />
+
+        <!-- End Date Picker -->
+        <Label Text="End Date" />
+        <DatePicker x:Name="EndDatePicker" />
+
+        <!-- Profile Picture Picker -->
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Upload Profile Picture" Clicked="OnUploadProfilePictureClicked" />
+            <Image x:Name="ProfilePictureImage" WidthRequest="50" HeightRequest="50" Aspect="AspectFill" />
+        </StackLayout>
+
+        <!-- Save Button -->
         <Button Text="Save Project" Clicked="OnSaveProjectClicked" />
     </StackLayout>
 </ContentPage>

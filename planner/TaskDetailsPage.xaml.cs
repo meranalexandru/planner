@@ -23,7 +23,7 @@ namespace planner
             LoadProjectsAsync();
 
             TaskNameEntry.Text = _task.Name;
-            DueDatePicker.Date = DateTime.TryParse(_task.DueDate, out var dueDate) ? dueDate : DateTime.Now;
+            DueDatePicker.Date = _task.DueDate != default(DateTime) ? _task.DueDate : DateTime.Now;
             DescriptionEditor.Text = _task.Description;
             PriorityPicker.SelectedItem = _task.Priority > 0 ? _task.Priority : (object)null;
             IsContinuousSwitch.IsToggled = _task.IsContinuous;
@@ -46,7 +46,7 @@ namespace planner
         private async void OnSaveTaskClicked(object sender, EventArgs e)
         {
             _task.Name = TaskNameEntry.Text;
-            _task.DueDate = DueDatePicker.Date.ToString("yyyy-MM-dd");
+            _task.DueDate = DueDatePicker.Date; // Assign DateTime directly
             _task.Description = DescriptionEditor.Text;
             _task.Priority = (int)(PriorityPicker.SelectedItem ?? 0);
             _task.IsContinuous = IsContinuousSwitch.IsToggled;

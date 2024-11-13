@@ -8,13 +8,26 @@
         <Label Text="Projects" FontSize="Large" HorizontalOptions="Center" />
 
         <!-- CollectionView for displaying projects -->
-        <CollectionView x:Name="ProjectsCollectionView" SelectionMode="Single" SelectionChanged="OnProjectSelected">
+        <CollectionView x:Name="ProjectsCollectionView" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="LightGray" CornerRadius="5" Padding="10" Margin="5">
-                        <StackLayout>
-                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" />
-                            <Label Text="{Binding Description}" FontSize="Small" TextColor="Gray" />
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <!-- Profile Picture -->
+                            <Image Source="{Binding ProfilePicturePath}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill" />
+
+                            <!-- Project Details -->
+                            <StackLayout Padding="10,0,0,0" HorizontalOptions="StartAndExpand">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" />
+                                <Label Text="{Binding Description}" FontSize="Small" TextColor="Gray" />
+                            </StackLayout>
+
+                            <!-- View, Edit, and Delete Buttons -->
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="Center">
+                                <Button Text="View" CommandParameter="{Binding .}" Clicked="OnViewProjectClicked" />
+                                <Button Text="Edit" CommandParameter="{Binding .}" Clicked="OnEditProjectClicked" />
+                                <Button Text="Delete" CommandParameter="{Binding .}" Clicked="OnDeleteProjectClicked" />
+                            </StackLayout>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

@@ -10,8 +10,14 @@
                 <!-- Today Button with the Current Day Number -->
                 <Button Text="Tasks" Clicked="OnTodayClicked" />
 
-                <!-- Projects Button with "P" Icon -->
+                <!-- Projects Button -->
                 <Button Text="Projects" Clicked="OnProjectsClicked" />
+
+                <!-- Todoist Tasks Button -->
+                <Button Text="Todoist Tasks" Clicked="OnTodoistTasksClicked" />
+
+                <!-- Statistics Button -->
+                <Button Text="Statistics" Clicked="OnStatisticsClicked" />
             </StackLayout>
         </ContentPage>
     </FlyoutPage.Flyout>

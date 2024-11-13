@@ -1,0 +1,44 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="planner.ProjectViewPage"
+             Title="Project View">
+
+    <!-- Background Image Layout -->
+    <Grid>
+        <!-- Background Image -->
+        <Image Source="{Binding ProfilePicturePath}" Aspect="AspectFill" Opacity="0.3" />
+
+        <!-- Project Content -->
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20">
+            <!-- Project Title and Description -->
+            <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" TextColor="White" />
+            <Label Text="{Binding Description}" FontSize="Medium" HorizontalOptions="Center" TextColor="White" />
+
+            <!-- Task CollectionView -->
+            <CollectionView ItemsSource="{Binding Tasks}" Margin="0,20,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" CornerRadius="5" Padding="10" Margin="5">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <!-- Task Name -->
+                                <Entry Text="{Binding Name, Mode=TwoWay}" HorizontalOptions="StartAndExpand" />
+
+                                <!-- Is Done Checkbox -->
+                                <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}" VerticalOptions="Center" />
+
+                                <!-- Priority Entry -->
+                                <Entry Text="{Binding Priority, Mode=TwoWay}" Keyboard="Numeric" WidthRequest="50" HorizontalOptions="Center" />
+
+                                <!-- Due Date Picker -->
+                                <DatePicker Date="{Binding DueDate, Mode=TwoWay}" WidthRequest="120" HorizontalOptions="Center" />
+
+                                <!-- Delete Button -->
+                                <Button Text="Delete" CommandParameter="{Binding .}" Clicked="OnDeleteTaskClicked" BackgroundColor="Red" TextColor="White" WidthRequest="70" HorizontalOptions="End" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </Grid>
+</ContentPage>
