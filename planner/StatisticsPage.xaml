@@ -1,13 +1,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              x:Class="planner.StatisticsPage"
              Title="Task Due Dates">
 
     <StackLayout Padding="10">
         <Label Text="Tasks by Due Date" FontSize="Large" HorizontalOptions="Center" />
 
-        <!-- Placeholder for the bar chart -->
-        <microcharts:ChartView x:Name="TaskDueDateChart" HeightRequest="300" />
+        <!-- GraphicsView for custom-drawn bar chart -->
+        <GraphicsView x:Name="TaskDueDateChart" HeightRequest="300" WidthRequest="300" />
     </StackLayout>
 </ContentPage>

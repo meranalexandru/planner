@@ -11,7 +11,7 @@ namespace planner
     public partial class TodoistIntegrationPage : ContentPage
     {
         private const string ApiUrl = "https://api.todoist.com/rest/v2/tasks";
-        private const string TodoistToken = ""; // Replace with your Todoist API token
+        private const string TodoistToken = "4d3545578bf0bf2faeba4043ba78415eb0a1bb04"; // Replace with your Todoist API token
 
         public TodoistIntegrationPage()
         {

@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
-using Microcharts;
 using SkiaSharp;
+using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,36 +24,50 @@ namespace planner
                 // Retrieve tasks grouped by due date from the database
                 var tasksByDueDate = await App.Database.GetTasksByDueDateAsync();
 
-                // Prepare chart entries for each day in the upcoming week
-                var chartEntries = new List<ChartEntry>();
+                // Prepare chart data for each day in the upcoming week
                 var today = DateTime.Today;
+                var chartData = new List<int>();
 
                 for (int i = 0; i <= 6; i++)
                 {
                     var day = today.AddDays(i);
                     var taskCount = tasksByDueDate.ContainsKey(day) ? tasksByDueDate[day] : 0;
-
-                    chartEntries.Add(new ChartEntry(taskCount)
-                    {
-                        Label = day.ToString("ddd"),
-                        ValueLabel = taskCount.ToString(),
-                        Color = SKColor.Parse("#3498db")
-                    });
+                    chartData.Add(taskCount);
                 }
 
-                // Assign the entries to the bar chart
-                TaskDueDateChart.Chart = new BarChart
-                {
-                    Entries = chartEntries,
-                    LabelTextSize = 30,
-                    ValueLabelOrientation = Orientation.Vertical,
-                    LabelOrientation = Orientation.Horizontal,
-                    MaxValue = (float)(chartEntries.Max(e => e.Value) + 1) // Adjust max for visual clarity
-                };
+                // Set up the GraphicsView with a drawable for custom chart rendering
+                TaskDueDateChart.Drawable = new TaskDueDateChartDrawable(chartData);
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Failed to load chart data: {ex.Message}", "OK");
+            }
+        }
+    }
+
+    public class TaskDueDateChartDrawable : IDrawable
+    {
+        private readonly List<int> _data;
+
+        public TaskDueDateChartDrawable(List<int> data)
+        {
+            _data = data;
+        }
+
+        public void Draw(ICanvas canvas, RectF dirtyRect)
+        {
+            var barWidth = 30;
+            var barSpacing = 20;
+            var maxBarHeight = 200;
+            var xPosition = 20;
+            var maxDataValue = _data.Max();
+
+            foreach (var value in _data)
+            {
+                var barHeight = (float)(value / (double)maxDataValue * maxBarHeight);
+                canvas.FillColor = Color.FromRgb(52, 152, 219);
+                canvas.FillRectangle(xPosition, maxBarHeight - barHeight, barWidth, barHeight);
+                xPosition += barWidth + barSpacing;
             }
         }
     }
