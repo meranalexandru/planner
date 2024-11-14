@@ -1,10 +1,6 @@
 using Microsoft.Maui.Controls;
-using SkiaSharp;
-using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace planner
@@ -35,39 +31,16 @@ namespace planner
                     chartData.Add(taskCount);
                 }
 
-                // Set up the GraphicsView with a drawable for custom chart rendering
-                TaskDueDateChart.Drawable = new TaskDueDateChartDrawable(chartData);
+                Console.WriteLine("Loaded Chart Data: " + string.Join(", ", chartData));
+
+                // Use static data for testing if chartData is empty
+                TaskDueDateChart.Drawable = chartData.Count > 0
+                    ? new TaskDueDateChartDrawable(chartData)
+                    : new TaskDueDateChartDrawable(new List<int> { 5, 10, 3, 7, 2, 6, 4 });
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Failed to load chart data: {ex.Message}", "OK");
-            }
-        }
-    }
-
-    public class TaskDueDateChartDrawable : IDrawable
-    {
-        private readonly List<int> _data;
-
-        public TaskDueDateChartDrawable(List<int> data)
-        {
-            _data = data;
-        }
-
-        public void Draw(ICanvas canvas, RectF dirtyRect)
-        {
-            var barWidth = 30;
-            var barSpacing = 20;
-            var maxBarHeight = 200;
-            var xPosition = 20;
-            var maxDataValue = _data.Max();
-
-            foreach (var value in _data)
-            {
-                var barHeight = (float)(value / (double)maxDataValue * maxBarHeight);
-                canvas.FillColor = Color.FromRgb(52, 152, 219);
-                canvas.FillRectangle(xPosition, maxBarHeight - barHeight, barWidth, barHeight);
-                xPosition += barWidth + barSpacing;
             }
         }
     }
