@@ -27,7 +27,7 @@
                                 <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}" VerticalOptions="Center" />
 
                                 <!-- Priority Entry -->
-                                <Entry Text="{Binding Priority, Mode=TwoWay}" Keyboard="Numeric" WidthRequest="50" HorizontalOptions="Center" />
+                                <!--<Entry Text="{Binding Priority, Mode=TwoWay}" Keyboard="Numeric" WidthRequest="50" HorizontalOptions="Center" />-->
 
                                 <!-- Due Date Picker -->
                                 <DatePicker Date="{Binding DueDate, Mode=TwoWay}" WidthRequest="120" HorizontalOptions="Center" />
