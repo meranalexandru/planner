@@ -14,10 +14,14 @@
                         <StackLayout Orientation="Horizontal" Spacing="10">
                             <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                                 <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" />
-                                <Label Text="{Binding DueDate}" FontSize="Small" TextColor="Gray" />
+                                <Label Text="{Binding DueDate, StringFormat='Due: {0:MM/dd/yyyy}'}" FontSize="Small" TextColor="Gray" />
                             </StackLayout>
-                            <Button Text="Mark as Done" CommandParameter="{Binding .}" Clicked="OnMarkAsDoneClicked"
-                                    HorizontalOptions="End" VerticalOptions="Center" />
+                            <StackLayout Orientation="Vertical" HorizontalOptions="End" VerticalOptions="Center">
+                                <Button Text="Edit" CommandParameter="{Binding .}" Clicked="OnEditTaskClicked"
+                                        TextColor="White" />
+                                <Button Text="Delete" CommandParameter="{Binding .}" Clicked="OnDeleteTaskClicked"
+                                         TextColor="White" />
+                            </StackLayout>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

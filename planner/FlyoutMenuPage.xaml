@@ -14,7 +14,12 @@
                 <Button Text="Projects" Clicked="OnProjectsClicked" />
 
                 <!-- Todoist Tasks Button -->
-                <Button Text="Todoist Tasks" Clicked="OnTodoistTasksClicked" />
+                <Button Text="Todoist Today Tasks" Clicked="OnTodoistTasksClicked" />
+                
+                <!-- Todoist Upcoming Tasks Button -->
+                <Button Text="Upcoming Tasks" Clicked="OnUpcomingTasksClicked" />
+
+           
 
                 <!-- Statistics Button -->
                 <Button Text="Statistics" Clicked="OnStatisticsClicked" />

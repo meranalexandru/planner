@@ -8,22 +8,22 @@ using Newtonsoft.Json;
 
 namespace planner
 {
-    public partial class TodoistIntegrationPage : ContentPage
+    public partial class UpcomingTasks : ContentPage
     {
         private const string ApiUrl = "https://api.todoist.com/rest/v2/tasks";
-        private const string TodoistToken = "47dc5e927c4b905402f45c441ec7f87837047b9c"; // Replace with your Todoist API token
+        private const string TodoistToken = "47dc5e927c4b905402f45c441ec7f87837047b9c"; // Replace with your token
 
-        public TodoistIntegrationPage()
+        public UpcomingTasks()
         {
             InitializeComponent();
-            LoadTodayTasks();
+            LoadTasksForNextWeek();
         }
 
-        private async void LoadTodayTasks()
+        private async void LoadTasksForNextWeek()
         {
             try
             {
-                var tasks = await GetTodayTasksAsync();
+                var tasks = await GetTasksForNextWeekAsync();
                 TasksListView.ItemsSource = tasks;
             }
             catch (Exception ex)
@@ -32,7 +32,7 @@ namespace planner
             }
         }
 
-        private async Task<List<TodoistTask>> GetTodayTasksAsync()
+        private async Task<List<TodoistTask>> GetTasksForNextWeekAsync()
         {
             using (var client = new HttpClient())
             {
@@ -44,11 +44,13 @@ namespace planner
                 var tasks = JsonConvert.DeserializeObject<List<TodoistTask>>(content);
 
                 var today = DateTime.Today;
+                var nextWeek = today.AddDays(7);
+
+                // Filter tasks with due dates within the next 7 days
                 return tasks.FindAll(task =>
                     task.due != null &&
                     DateTime.TryParse(task.due.date, out var dueDate) &&
-                    dueDate.Date == today);
-
+                    dueDate.Date >= today && dueDate.Date <= nextWeek);
             }
         }
 
@@ -59,7 +61,6 @@ namespace planner
                 bool isCompleted = await CompleteTaskAsync(task.id);
                 if (isCompleted)
                 {
-                    // Update UI by removing completed task
                     var tasks = (List<TodoistTask>)TasksListView.ItemsSource;
                     tasks.Remove(task);
                     TasksListView.ItemsSource = null;
@@ -86,20 +87,4 @@ namespace planner
         }
     }
 
-    public class TodoistTask
-    {
-        public string id { get; set; }
-        public string content { get; set; }
-        public string description { get; set; }
-        public DueDate due { get; set; }
-        public string url { get; set; }
-    }
-
-    public class DueDate
-    {
-        public string date { get; set; }
-        public bool is_recurring { get; set; }
-        public string datetime { get; set; }
-        public string timezone { get; set; }
-    }
 }

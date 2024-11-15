@@ -11,7 +11,8 @@ namespace planner
         public MainPage()
         {
             InitializeComponent();
-            MessagingCenter.Subscribe<ProjectViewPage>(this, "RefreshMainPage", (sender) => {
+            MessagingCenter.Subscribe<ProjectViewPage>(this, "RefreshMainPage", (sender) =>
+            {
                 LoadTodayPendingTasks(); // Reload tasks on the main page
             });
         }
@@ -39,7 +40,6 @@ namespace planner
             TasksCollectionView.ItemsSource = TodayTasks;
         }
 
-
         private async void OnAddTaskClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new TaskDetailsPage());
@@ -51,6 +51,27 @@ namespace planner
             {
                 await App.Database.MarkTaskAsDoneAsync(taskToMarkDone);
                 TodayTasks.Remove(taskToMarkDone); // Remove task from the list after marking it as done
+            }
+        }
+
+        private async void OnEditTaskClicked(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.CommandParameter is TaskItem taskToEdit)
+            {
+                await Navigation.PushAsync(new TaskDetailsPage(taskToEdit)); // Navigate to TaskDetailsPage with the selected task
+            }
+        }
+
+        private async void OnDeleteTaskClicked(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.CommandParameter is TaskItem taskToDelete)
+            {
+                var confirm = await DisplayAlert("Delete Task", "Are you sure you want to delete this task?", "Yes", "No");
+                if (confirm)
+                {
+                    await App.Database.DeleteTaskAsync(taskToDelete); // Delete from database
+                    TodayTasks.Remove(taskToDelete); // Remove from ObservableCollection
+                }
             }
         }
     }

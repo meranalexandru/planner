@@ -31,7 +31,12 @@ namespace planner
         {
             await NavigateToPageAsync(new TodoistIntegrationPage());
         }
+        private async void OnUpcomingTasksClicked(object sender, EventArgs e)
+        {
+            await NavigateToPageAsync(new UpcomingTasks());
+        }
 
+        
         private async void OnStatisticsClicked(object sender, EventArgs e)
         {
             await NavigateToPageAsync(new StatisticsPage());
