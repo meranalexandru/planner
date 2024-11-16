@@ -4,13 +4,13 @@
              Title="Task Details">
 
     <StackLayout Padding="20" Spacing="10">
-        <Entry x:Name="TaskNameEntry" Placeholder="Task Name" />
+        <Entry x:Name="TaskNameEntry" Placeholder="Task Name" IsEnabled="True" />
 
-        <DatePicker x:Name="DueDatePicker" />
+        <DatePicker x:Name="DueDatePicker" IsEnabled="True" />
 
-        <Editor x:Name="DescriptionEditor" Placeholder="Task Description" AutoSize="TextChanges" HeightRequest="100" />
+        <Editor x:Name="DescriptionEditor" Placeholder="Task Description" AutoSize="TextChanges" HeightRequest="100" IsEnabled="True" />
 
-        <Picker x:Name="PriorityPicker" Title="Priority">
+        <Picker x:Name="PriorityPicker" Title="Priority" IsEnabled="True">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:Int32}">
                     <x:Int32>1</x:Int32>
@@ -22,12 +22,22 @@
             </Picker.ItemsSource>
         </Picker>
 
-        <Switch x:Name="IsContinuousSwitch" />
-        <Label Text="Is Continuous" />
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+            <Switch x:Name="IsContinuousSwitch" />
+            <Label Text="Is Continuous" VerticalOptions="Center" Margin="10,0,0,0" />
+        </StackLayout>
 
         <!-- Project selection picker -->
-        <Picker x:Name="ProjectPicker" Title="Select Project" />
+        <Picker x:Name="ProjectPicker" Title="Select Project" IsEnabled="True" />
 
+        <!-- Save button -->
         <Button Text="Save Task" Clicked="OnSaveTaskClicked" />
+
+        <!-- Edit/Delete buttons -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+            <Button x:Name="EditButton" Text="Edit" Clicked="OnEditTaskClicked" IsVisible="False" />
+            <Button x:Name="DeleteButton" Text="Delete" Clicked="OnDeleteTaskClicked" IsVisible="True"
+                    BackgroundColor="Red" TextColor="White" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>
