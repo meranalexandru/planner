@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2c336426-5113-43b4-b7a8-03a11587c71c)Multiplatform Planner application in .NET MAUI
+Multiplatform Planner application in .NET MAUI
  
 Introduction
 
@@ -233,6 +233,8 @@ The Planner Application follows a modular architecture to ensure scalability and
 This technical overview highlights the robust and flexible foundation of the Planner Application, making it an effective tool for managing projects and tasks while ensuring data integrity and seamless integration.
  
 User Experience
+![image](https://github.com/user-attachments/assets/2c336426-5113-43b4-b7a8-03a11587c71c)
+
 1.Adding, editing and deleting a task
 
 ![image](https://github.com/user-attachments/assets/abcf2cbe-2515-4445-a95b-6b937f26d57e)
